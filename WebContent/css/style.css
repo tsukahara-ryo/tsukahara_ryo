@@ -1,0 +1,145 @@
+body {
+	background: #b1c8ed;
+}
+
+.main-contents {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color:alpha(opacity=50);
+	height: 100%;
+	width: 800px;
+}
+
+.messages{
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #FFF;
+    background: #6eb7ff;
+    border-bottom: solid 6px #3f87ce;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+}
+
+.message{
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+
+.comment{
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+
+.tweet-box {
+	width: 760px;
+	height: 56px;
+}
+
+.header {
+	text-align: right;
+}
+
+.profile {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #00BCD4;
+    background: #e4fcff;/*îwåiêF*/
+    border-top: solid 6px #1dc1d6;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+.profile .name h2 {
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 36px;
+	margin: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+a.profile .account {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+.profile .description {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+.search {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    background: #FFF;
+}
+.search p {
+    margin: 0;
+    padding: 0;
+}
+
+.management {
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    color: #6091d3;/*ï∂éöêF*/
+    background: #FFF;
+    border: solid 3px #6091d3;
+    border-radius: 10px;
+}
+
+.form-area {
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #232323;
+    background: #fff8e8;
+    border-left: solid 10px #ffc06e;
+}
+
+.account-name .name {
+	font-weight: lighter;
+	color: gray;
+	font: small-caption;
+}
+
+.message .date {
+	font-weight: lighter;
+	color: gray;
+	font: small-caption;
+}
+
+.copyright {
+	width: 250px;
+	margin: 0 auto;
+}
+
+label {
+	display: block;
+}
+
+.errorMessages {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	color: red;
+}
+input#stopbutton {
+	background-color: #0080ff;
+}
+input#bornbutton {
+	background-color: #ff0080;
+}
+}
