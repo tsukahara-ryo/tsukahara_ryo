@@ -177,17 +177,17 @@ public class UserService {
 			close(connection);
 		}
 	}
-	public String chackId(String loginid) {
+	public boolean isUnique(String loginid, int id) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			userDao.checkId(connection, loginid);
+			User user = userDao.getUser(connection, loginid, id);
 
 			commit(connection);
 
-			return loginid;
+			return user == null;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -198,6 +198,51 @@ public class UserService {
 			close(connection);
 		}
 	}
+
+	public boolean signUpIsUnique(String loginid) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.getSignUpUser(connection, loginid);
+
+			commit(connection);
+
+			return user == null;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public String getId(String id) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			userDao.getId(connection, id);
+
+			commit(connection);
+
+			return id;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 
 
 

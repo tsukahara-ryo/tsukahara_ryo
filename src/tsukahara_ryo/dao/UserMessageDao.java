@@ -25,14 +25,33 @@ public class UserMessageDao {
 			sql.append("SELECT * FROM user_message ");
 			sql.append("where insert_date BETWEEN ? and ? ");
 			if(StringUtils.isEmpty(cotegory) == false){
-				sql.append("and cotegory = ?");
+
+				String regex = "　";
+				String result = cotegory.replaceAll(regex, " ");
+				String[] cot = result.split(" ", -1);
+				if (cot.length > 1){
+				sql.append("and cotegory = ? " );
+				sql.append("or cotegory = ? and insert_date BETWEEN ? and ?" );
+				}else{
+					sql.append("and cotegory = ? " );
+				}
 			}
-			sql.append("order by insert_date DESC ");
+			sql.append(" order by insert_date DESC ");
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, String.format("%s 00:00:00", begin));
 			ps.setString(2, String.format("%s 23:59:59", end));
 			if(StringUtils.isEmpty(cotegory) == false){
-				ps.setString(3, cotegory);
+				String regex = "　";
+				String result = cotegory.replaceAll(regex, " ");
+				String[] cot = result.split(" ", -1);
+				if (cot.length > 1){
+				ps.setString(3, cot[0]);
+				ps.setString(4, cot[1]);
+				ps.setString(5, String.format("%s 00:00:00", begin));
+				ps.setString(6, String.format("%s 23:59:59", end));
+				}else{
+					ps.setString(3, cot[0]);
+				}
 			}
 			ps.executeQuery();
 

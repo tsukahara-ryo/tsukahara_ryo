@@ -30,6 +30,27 @@ public class SettingsServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		List<String> messages = new ArrayList<String>();
+		String id = request.getParameter("id");
+
+		if (StringUtils.isBlank(request.getParameter("id")) || !id.matches("[0-9]") == true){
+			messages.add("不正なIDが入力されました");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("usermanagement");
+			return;
+		}
+
+
+		String chack = new UserService().getId(request.getParameter("id"));
+
+		if (chack == null){
+			messages.add("ログインIDが存在しません");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("usermanagement");
+			return;
+		}
+
 
 		List<Branch> branches = new BranchService().getBranch();
 		List<Position> position = new PositionService().getPosition();
@@ -47,6 +68,9 @@ public class SettingsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		List<String> messages = new ArrayList<String>();
+		List<Branch> branches = new BranchService().getBranch();
+		List<Position> position = new PositionService().getPosition();
+
 
 		HttpSession session = request.getSession();
 		User editUser = getEditUser(request);
@@ -62,9 +86,13 @@ public class SettingsServlet extends HttpServlet {
 			}
 			response.sendRedirect("usermanagement");
 		} else {
-			session.setAttribute("errorMessages", messages);
+			request.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", editUser);
-			response.sendRedirect("settings");
+			request.setAttribute("branches", branches);
+			request.setAttribute("positions", position);
+
+			request.getRequestDispatcher("settings.jsp").forward(request, response);
+
 		}
 	}
 
@@ -86,21 +114,58 @@ public class SettingsServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
+		int id = Integer.parseInt(request.getParameter("id"));
 		String account = request.getParameter("login_id");
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
 		String name = request.getParameter("name");
+		String loginId = request.getParameter("login_id");
+		int branch = (Integer.parseInt(request.getParameter("branch_id")));
+		int position = (Integer.parseInt(request.getParameter("position_id")));
 
-		if (StringUtils.isEmpty(account) == true) {
+		if (StringUtils.isBlank(account) == true) {
 			messages.add("ログインIDを入力してください");
 		}
-		if (password == password2){
+		boolean isUnique = new UserService().isUnique(loginId, id);
+		if (!isUnique){
+			messages.add("このログインIDは使用されています");
+		}
+		if (!password.equals(password2)){
 			messages.add("パスワードが一致しません");
 		}
-		if (StringUtils.isEmpty(name) == true) {
-			messages.add("名称を入力してください");
+		if (StringUtils.isBlank(name) == true) {
+			messages.add("名前を入力してください");
 		}
+		if (branch == 1 && position == 3){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+		}
+		if (branch == 1 && position == 4){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+		}
+		if (branch == 2 && position == 1){
+			messages.add("店名と部署・役職が不正な組み合わせです");
 
+		}
+		if (branch == 2 && position == 2){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+
+		}
+		if (branch == 3 && position == 1){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+
+		}
+		if (branch == 3 && position == 2){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+
+		}
+		if (branch == 4 && position == 1){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+
+		}
+		if (branch == 4 && position == 2){
+			messages.add("店名と部署・役職が不正な組み合わせです");
+
+		}
 		if (messages.size() == 0) {
 			return true;
 		} else {

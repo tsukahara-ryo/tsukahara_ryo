@@ -1,5 +1,8 @@
 body {
-	background: #b1c8ed;
+	background: #cecece;
+	width: 830px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .main-contents {
@@ -7,35 +10,104 @@ body {
 	margin-bottom: 0px;
 	margin-left: 20px;
 	margin-right: 20px;
-	background-color:alpha(opacity=50);
+	background-color: alpha(opacity = 50);
 	height: 100%;
 	width: 800px;
 }
 
-.messages{
-	padding: 0.5em 1em;
-    margin: 2em 0;
-    color: #FFF;
-    background: #6eb7ff;
-    border-bottom: solid 6px #3f87ce;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-    border-radius: 9px;
+.subject {
+	margin: 36px auto;
+	padding: 1.5em;
+	line-height: 1.5;
+	border: 1px solid #c489ff;
+	background-color: #fff;
+	border-radius: 15px; /*äpÇÃä€Ç›*/
+	-moz-border-radius: 15px; /*äpÇÃä€Ç›*/
+	-webkit-border-radius: 15px; /*äpÇÃä€Ç›*/
+	width: 80%;
+	color: #808080;
 }
 
-.message{
-	padding: 0.5em 1em;
-    margin: 2em 0;
-    color: #232323;
-    background: #fff8e8;
-    border-left: solid 10px #ffc06e;
+.cotegory {
+	margin: 36px auto;
+	padding: 1.5em;
+	line-height: 1.5;
+	border: 1px solid #c489ff;
+	background-color: #fff;
+	border-radius: 15px; /*äpÇÃä€Ç›*/
+	-moz-border-radius: 15px; /*äpÇÃä€Ç›*/
+	-webkit-border-radius: 15px; /*äpÇÃä€Ç›*/
+	width: 80%;
+	color: #808080;
 }
 
-.comment{
+.text {
+	margin: 36px auto;
+	padding: 1.5em;
+	line-height: 1.5;
+	border: 1px solid #c489ff;
+	background-color: #fff;
+	border-radius: 15px; /*äpÇÃä€Ç›*/
+	-moz-border-radius: 15px; /*äpÇÃä€Ç›*/
+	-webkit-border-radius: 15px; /*äpÇÃä€Ç›*/
+	width: 80%;
+	color: #808080;
+	word-wrap: break-word;
+}
+
+.text-taitle {
+
+}
+
+.messages {
 	padding: 0.5em 1em;
-    margin: 2em 0;
-    color: #232323;
-    background: #fff8e8;
-    border-left: solid 10px #ffc06e;
+	margin: 2em 0;
+	color: #FFF;
+	background: #7c7c7c;
+	border-bottom: solid 6px #000000;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+	border-radius: 9px;
+}
+
+.message {
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	font-weight: bold;
+	border: solid 3px #000000;
+}
+
+.comment {
+	background-color: #696969;
+	border: 3px solid #000;
+	border-radius: 5px;
+	position: relative;
+	margin: 10px 0 0 0;
+	padding: 8px 8px 8px 8px;
+}
+
+.comment:before {
+	border: 10px solid transparent;
+	border-bottom-color: #696969;
+	border-top-width: 0;
+	top: -9px;
+	content: "";
+	display: block;
+	left: 30px;
+	position: absolute;
+	width: 0;
+	z-index: 2;
+}
+
+.comment:after {
+	border: 10px solid transparent;
+	border-bottom-color: #000;
+	border-top-width: 0;
+	top: -10px;
+	content: "";
+	display: block;
+	left: 30px;
+	position: absolute;
+	width: 0;
 }
 
 .tweet-box {
@@ -48,12 +120,12 @@ body {
 }
 
 .profile {
-    padding: 0.5em 1em;
-    margin: 2em 0;
-    color: #00BCD4;
-    background: #e4fcff;/*îwåiêF*/
-    border-top: solid 6px #1dc1d6;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	color: #000000;
+	background: #c0c0c0; /*îwåiêF*/
+	border-top: solid 6px #808080;
+	box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }
 
 .profile .name h2 {
@@ -78,40 +150,63 @@ a.profile .account {
 }
 
 .search {
-    position: relative;
-    margin: 2em 0;
-    padding: 0.5em 1em;
-    border: solid 3px #95ccff;
-    border-radius: 8px;
-    background: #FFF;
-}
-.search p {
-    margin: 0;
-    padding: 0;
-}
-
-.management {
+	position: relative;
+	margin: 2em 0;
 	padding: 0.5em 1em;
-    margin: 2em 0;
-    font-weight: bold;
-    color: #6091d3;/*ï∂éöêF*/
-    background: #FFF;
-    border: solid 3px #6091d3;
-    border-radius: 10px;
+	border: solid 3px #808080;
+	border-radius: 8px;
+	background: #e3e3e3;
 }
 
+.search p {
+	margin: 0;
+	padding: 0;
+}
+
+.management { .login { background:#fafafa;
+	margin: 3em auto;
+	padding: 0 1em;
+	max-width: 370px;
+	padding: 5px 5px 10px 5px;
+}
+
+.form-item {
+	margin-bottom: 0.75em;
+	width: 100%;
+}
+
+.form-item input {
+	background: #fafafa;
+	border: none;
+	border-bottom: 2px solid #e9e9e9;
+	color: #666;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	height: 50px;
+	transition: border-color 0.3s;
+	width: 100%;
+}
+
+.form-item input:focus {
+	border-bottom: 2px solid #c0c0c0;
+	outline: none;
+}
+
+}
 .form-area {
 	padding: 0.5em 1em;
-    margin: 2em 0;
-    color: #232323;
-    background: #fff8e8;
-    border-left: solid 10px #ffc06e;
+	margin: 2em 0;
+	color: #232323;
+	background: #cecece;
+	border-left: solid 10px #c0c0c0;
+	overflow: auto;
 }
 
 .account-name .name {
 	font-weight: lighter;
-	color: gray;
-	font: small-caption;
+	color: #FFF;
+	font-size: 200%;
+	background: #666666;
 }
 
 .message .date {
@@ -125,6 +220,84 @@ a.profile .account {
 	margin: 0 auto;
 }
 
+.login {
+	background: #fafafa;
+	margin: 3em auto;
+	padding: 0 1em;
+	max-width: 370px;
+	padding: 5px 5px 10px 5px;
+}
+
+.form-item {
+	margin-bottom: 0.75em;
+	width: 100%;
+}
+
+/*.form-item input {
+	background: #fafafa;
+	border: none;
+	border-bottom: 2px solid #808080;
+	color: #666;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	height: 50px;
+	transition: border-color 0.3s;
+	width: 100%;
+}
+
+.form-item input:focus {
+	border-bottom: 2px solid #c0c0c0;
+	outline: none;
+}*/
+.newmessage {
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	color: #000000;
+	background: white;
+	border-top: solid 5px #5d627b;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.messagedate {
+	font-weight: lighter;
+	color: #FFF;
+	font-size: 150%;
+	background: #666666;
+}
+
+.settingbutton {
+	width: 47%;
+	margin: 0 auto;
+	max-width: 100px;
+}
+
+.isdeletedbutton {
+	width: 47%;
+	margin: 0 auto;
+	max-width: 100px;
+}
+.signup {
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	color: #000000;
+	background: white;
+	border-top: solid 5px #5d627b;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.settings {
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	color: #000000;
+	background: white;
+	border-top: solid 5px #5d627b;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+table caption {
+	font-size: 150%;
+}
+
 label {
 	display: block;
 }
@@ -136,9 +309,11 @@ label {
 	margin-left: 10px;
 	color: red;
 }
+
 input#stopbutton {
 	background-color: #0080ff;
 }
+
 input#bornbutton {
 	background-color: #ff0080;
 }

@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import tsukahara_ryo.beans.User;
 import tsukahara_ryo.beans.UserComment;
 import tsukahara_ryo.beans.UserMessage;
 import tsukahara_ryo.service.MessageService;
@@ -25,6 +27,10 @@ public class TopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		HttpSession session = request.getSession();
+    	User loginUser = (User) session.getAttribute("loginUser");
+		request.setAttribute("loginUser", loginUser);
+
 		String cotegory = request.getParameter("cotegory");
 
 		String begin = getParameter(request, "begin", "2017-11-01");
@@ -33,9 +39,13 @@ public class TopServlet extends HttpServlet {
 		List<UserComment> comment = new MessageService().getUserComment();
 		List<UserMessage> messages = new MessageService().getMessage(begin, end, cotegory);
 
+
 		request.setAttribute("comments", comment);
 		request.setAttribute("messages", messages);
 
+		request.setAttribute("cotegory", cotegory);
+		request.setAttribute("begin", begin);
+		request.setAttribute("end", end);
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}
 

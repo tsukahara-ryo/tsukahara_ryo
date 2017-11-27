@@ -11,8 +11,10 @@
 <link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+	<div class="header">
 	<a href="./">ホーム</a>
+	<a href="logout">ログアウト</a>
+	</div>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
@@ -25,20 +27,18 @@
 	</c:if>
 
 
-
-	<form action="newmessage" method="post">
-		<p><label for="subject">件名</label></p>
-		<p><input name="subject"id="subject" /> ※必須 ３０文字以下</p>
-		<p><label for="cotegory">カテゴリー</label></p>
-		<p><input name="cotegory" id="cotegory" /> ※必須 １０文字以下</p>
-		<p><label for="text">本文</label></p>
-		<p><textarea name="text" cols="50" rows="10" class="cotegry-box" ></textarea> ※必須 ５００文字以下</p>
-		<p><input type="submit"value="投稿" /></p>
-		<a href="./">戻る</a>
-	</form>
-
-
-
-	<div class="copyright">Copyright(c)Ryo Tsukahara</div>
+	<div class="newmessage">
+	<label>新規投稿</label>
+		<form action="newmessage" method="post">
+			<p><label for="subject">件名</label></p>
+			<p><input name="subject"id="subject" value="${message.subject}" /> ※必須 30文字以下</p>
+			<p><label for="cotegory">カテゴリー</label></p>
+			<p><input name="cotegory" id="cotegory" value="${message.cotegory}" /> ※必須 10文字以下</p>
+			<p><label for="text">本文</label></p>
+			<p><textarea name="text" cols="50" rows="10" class="cotegry-box" ><c:out value="${message.text}" /></textarea> ※必須 1000文字以下</p>
+			<p><input type="submit"value="投稿" /></p>
+		</form>
+		<input type="button" onclick="location.href='http://localhost:8080/tsukahara_ryo/newmessage'"value="クリア">
+	</div>
 </body>
 </html>

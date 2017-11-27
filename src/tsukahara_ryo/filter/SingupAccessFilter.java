@@ -17,29 +17,27 @@ import tsukahara_ryo.beans.User;
 
 @WebFilter("/signup")
 
-public class SingupAccessFilter implements Filter{
-	    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-	    		throws IOException,ServletException{
+public class SingupAccessFilter implements Filter {
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
 
+		HttpSession session = ((HttpServletRequest) req).getSession();
 
-	    	HttpSession session = ((HttpServletRequest) req).getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null){
+			chain.doFilter(req, res);
+			return;
+		}
+		if (loginUser.getPosition_id() == 1) {
+			chain.doFilter(req, res);
+			return;
+		}
 
-	    	User loginUser = (User) session.getAttribute("loginUser");
-	        if(loginUser.getPosition_id() == 3){
-	        	chain.doFilter(req, res);
-	        	return;
-	        }
+		((HttpServletResponse) res).sendRedirect("./");
+	}
+	public void init(FilterConfig config) throws ServletException {
+	}
 
-
-	    	((HttpServletResponse) res).sendRedirect("./");
-
-	    }
-
-
-
-	    public void init(FilterConfig config) throws ServletException{}
-	    public void destroy(){}
-
-
-
+	public void destroy() {
+	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import tsukahara_ryo.beans.Branch;
 import tsukahara_ryo.beans.Position;
@@ -21,6 +22,10 @@ public class UserManagementServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
+		HttpSession session = request.getSession();
+    	User loginUser = (User) session.getAttribute("loginUser");
+		request.setAttribute("loginUser", loginUser);
 
 		List<User> users = new UserService().getAllUser();
 		request.setAttribute("users", users);

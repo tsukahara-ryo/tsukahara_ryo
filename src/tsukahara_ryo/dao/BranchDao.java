@@ -18,7 +18,7 @@ public class BranchDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM branches";
+			String sql = "SELECT * FROM branches ";
 
 			ps = connection.prepareStatement(sql);
 

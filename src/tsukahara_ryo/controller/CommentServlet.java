@@ -51,10 +51,7 @@ public class CommentServlet extends HttpServlet {
 
 		String comment = request.getParameter("comment");
 
-		if (StringUtils.isEmpty(comment) == true) {
-			newcomments.add("コメントを入力してください");
-		}
-		if (!comment.equals("")) {
+		if (StringUtils.isBlank(comment) == true) {
 			newcomments.add("コメントを入力してください");
 		}
 

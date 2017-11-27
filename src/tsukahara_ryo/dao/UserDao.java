@@ -21,7 +21,7 @@ import tsukahara_ryo.exception.SQLRuntimeException;
 public class UserDao {
 
 	public User getUsers(Connection connection, String login_id,
-			String password, String is_deleted) {
+			String password) {
 
 		PreparedStatement ps = null;
 		try {
@@ -36,8 +36,6 @@ public class UserDao {
 			List<User> userList = toUserList(rs);
 			if (userList.isEmpty() == true) {
 				return null;
-//			} else if (2 <= userList.size()) {
-//				throw new IllegalStateException("2 <= userList.size()");
 			} else {
 				return userList.get(0);
 			}
@@ -51,7 +49,7 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users";
+			String sql = "SELECT * FROM users ORDER BY branch_id, position_id ASC ";
 
 			ps = connection.prepareStatement(sql);
 
@@ -169,7 +167,6 @@ public class UserDao {
 				ps.setInt(4, users.getBranch_id());
 				ps.setInt(5, users.getPosition_id());
 				ps.setInt(6 ,users.getId());
-				System.out.println(ps.toString());
 				int count = ps.executeUpdate();
 				if (count == 0) {
 					throw new NoRowsUpdatedRuntimeException();
@@ -179,7 +176,6 @@ public class UserDao {
 			ps.setInt(3, users.getBranch_id());
 			ps.setInt(4, users.getPosition_id());
 			ps.setInt(5 ,users.getId());
-			System.out.println(ps.toString());
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				throw new NoRowsUpdatedRuntimeException();
@@ -319,15 +315,62 @@ public class UserDao {
 		}
 	}
 
-	public void checkId(Connection connection, String loginid) {
+	public User getUser(Connection connection, String loginid, int id) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("select * FROM users where login_id = ? ");
+			sql.append("SELECT * FROM users WHERE login_id = ? and id <> ?");
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, loginid);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+
+			List<User> users = toUserList(rs);
+
+			if (users.isEmpty())
+				return null;
+			return users.get(0);
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public User getSignUpUser(Connection connection, String loginid) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE login_id = ? ");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, loginid);
+			ResultSet rs = ps.executeQuery();
+
+			List<User> users = toUserList(rs);
+
+			if (users.isEmpty())
+				return null;
+			return users.get(0);
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public void getId(Connection connection, String id) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("select id = ? from users ");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, id);
 			ps.executeQuery();
 
 			return;

@@ -11,7 +11,7 @@ import tsukahara_ryo.utils.CipherUtil;
 
 public class LoginService {
 
-	public User login(String login_id, String password, String is_deleted) {
+	public User login(String login_id, String password) {
 
 		Connection connection = null;
 		try {
@@ -20,7 +20,7 @@ public class LoginService {
 			UserDao userDao = new UserDao();
 			String encPassword = CipherUtil.encrypt(password);
 			User user = userDao
-					.getUsers(connection, login_id, encPassword, is_deleted);
+					.getUsers(connection, login_id, encPassword);
 
 			commit(connection);
 

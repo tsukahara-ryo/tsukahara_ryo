@@ -10,53 +10,46 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<a href="./">ホーム</a>
-<a href="usermanagement">ユーザー編集</a>
-<div class="main-contents">
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-			</c:forEach>
-		</ul>
+	<div class="header">
+		<a href="./">ホーム</a>
+		<a href="usermanagement">ユーザー編集</a>
+		<a href="logout">ログアウト</a>
 	</div>
-	<c:remove var="errorMessages" scope="session"/>
-</c:if>
-
-
-
-
-<form action="signup" method="post"><br />
-	<label for="login_id">ログインID</label>
-	<input name="login_id" value="${editUser.name}" id="login_id"/>（ログインの際に必要になります）<br />
-
-	<label for="name">名前</label>
-	<input name="name" value="${editUser.name}" id="name"/><br />
-
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/> <br />
-	<label for="password2">確認パスワード</label>
-	<input name="password2" type="password" id="password2"/> <br />
-
-
-	<label for="branch_id">店名</label>
-		<select name="branch_id">
-    		<c:forEach var="branch" items="${branches}">
-				<option value="${branch.id}"><c:out value="${branch.name}"/> </option>
-			</c:forEach>
-		</select><br />
-
-	<label for="position_id">部署・役職</label>
-		<select name="position_id">
-   			 <c:forEach var="position" items="${positions}">
-				<option value="${position.id}"><c:out value="${position.name}"/> </option>
-			</c:forEach> </select><br />
-
-	<input type="submit" value="登録" /> <br />
-	<a href="./">戻る</a>
-</form>
-<div class="copyright"></div>
-</div>
+	<div class="signup">
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="message">
+						<li><c:out value="${message}" />
+					</c:forEach>
+				</ul>
+			</div>
+			<c:remove var="errorMessages" scope="session"/>
+		</c:if>
+		<form action="signup" method="post"><br />
+			<label for="login_id">ログインID</label>
+			<p><input name="login_id" value="${editUser.login_id}" id="login_id"/>※半角英数字で6～20文字</p>
+			<label for="name">名前</label>
+			<p><input name="name" value="${editUser.name}" id="name"/>※10文字以下</p>
+			<label for="password">パスワード</label>
+			<p><input name="password" type="password" id="password"/>※記号を含む半角英数字で6～20文字</p>
+			<label for="password2">確認パスワード</label>
+			<input name="password2" type="password" id="password2"/> <br />
+			<label for="branch_id">店名</label>
+			<select name="branch_id">
+	    		<c:forEach var="branch" items="${branches}">
+					<option value="${branch.id}"><c:out value="${branch.name}"/> </option>
+				</c:forEach>
+			</select><br />
+			<label for="position_id">部署・役職</label>
+				<select name="position_id">
+		   			<c:forEach var="position" items="${positions}">
+						<option value="${position.id}"><c:out value="${position.name}"/> </option>
+					</c:forEach>
+				</select><br />
+				<br />
+			<input type="submit" value="登録" /> <br />
+		</form>
+	</div>
 </body>
 </html>

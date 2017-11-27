@@ -31,10 +31,9 @@ public class LoginServlet extends HttpServlet {
 
 		String login_id = request.getParameter("login_id");
 		String password = request.getParameter("password");
-		String is_deleted = request.getParameter("is_deleted");
 
 		LoginService loginService = new LoginService();
-		User user = loginService.login(login_id, password, is_deleted);
+		User user = loginService.login(login_id, password);
 
 		HttpSession session = request.getSession();
 		if (user != null) {
@@ -46,9 +45,8 @@ public class LoginServlet extends HttpServlet {
 
 			List<String> messages = new ArrayList<String>();
 			messages.add("ログインに失敗しました。");
-			request.setAttribute("errorMessages", messages);
+			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("login");
 		}
 	}
-
 }
