@@ -16,33 +16,21 @@ body {
 }
 
 .subject {
-	margin: 36px auto;
-	padding: 1.5em;
-	line-height: 1.5;
-	border: 1px solid #c489ff;
 	background-color: #fff;
-	border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
-	-moz-border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
-	-webkit-border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
 	width: 80%;
 	color: #808080;
+	display:inline;
+
 }
 
 .cotegory {
-	margin: 36px auto;
-	padding: 1.5em;
-	line-height: 1.5;
-	border: 1px solid #c489ff;
 	background-color: #fff;
-	border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
-	-moz-border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
-	-webkit-border-radius: 15px; /*Šp‚ÌŠÛ‚Ý*/
 	width: 80%;
 	color: #808080;
+	display:inline;
 }
 
 .text {
-	margin: 36px auto;
 	padding: 1.5em;
 	line-height: 1.5;
 	border: 1px solid #c489ff;
@@ -54,35 +42,21 @@ body {
 	color: #808080;
 	word-wrap: break-word;
 }
-
-.text-taitle {
-
-}
-
-.messages {
-	padding: 0.5em 1em;
-	margin: 2em 0;
-	color: #FFF;
-	background: #7c7c7c;
-	border-bottom: solid 6px #000000;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-	border-radius: 9px;
-}
-
 .message {
 	padding: 0.5em 1em;
-	margin: 2em 0;
-	font-weight: bold;
-	border: solid 3px #000000;
+	margin: 0.5em 0;
+	background-color: #808080;
+	overflow: auto;
+	color: #FFF;
 }
 
 .comment {
 	background-color: #696969;
-	border: 3px solid #000;
-	border-radius: 5px;
 	position: relative;
 	margin: 10px 0 0 0;
 	padding: 8px 8px 8px 8px;
+	overflow: auto;
+	color: #FFF;
 }
 
 .comment:before {
@@ -116,9 +90,9 @@ body {
 }
 
 .header {
-	text-align: right;
+	text-align: left;
+	display: flex;
 }
-
 .profile {
 	padding: 0.5em 1em;
 	margin: 2em 0;
@@ -196,28 +170,20 @@ a.profile .account {
 .form-area {
 	padding: 0.5em 1em;
 	margin: 2em 0;
-	color: #232323;
-	background: #cecece;
-	border-left: solid 10px #c0c0c0;
-	overflow: auto;
-}
-
-.account-name .name {
-	font-weight: lighter;
 	color: #FFF;
-	font-size: 200%;
-	background: #666666;
+	background: #808080;
+	border-left: solid 10px #393939;
 }
-
+.comment-box{
+	overflow: hidden;
+}
+.message-box{
+	overflow: hidden;
+}
 .message .date {
 	font-weight: lighter;
 	color: gray;
 	font: small-caption;
-}
-
-.copyright {
-	width: 250px;
-	margin: 0 auto;
 }
 
 .login {
@@ -233,22 +199,7 @@ a.profile .account {
 	width: 100%;
 }
 
-/*.form-item input {
-	background: #fafafa;
-	border: none;
-	border-bottom: 2px solid #808080;
-	color: #666;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 1em;
-	height: 50px;
-	transition: border-color 0.3s;
-	width: 100%;
-}
 
-.form-item input:focus {
-	border-bottom: 2px solid #c0c0c0;
-	outline: none;
-}*/
 .newmessage {
 	padding: 0.5em 1em;
 	margin: 2em 0;
@@ -257,14 +208,6 @@ a.profile .account {
 	border-top: solid 5px #5d627b;
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
-
-.messagedate {
-	font-weight: lighter;
-	color: #FFF;
-	font-size: 150%;
-	background: #666666;
-}
-
 .settingbutton {
 	width: 47%;
 	margin: 0 auto;
@@ -292,6 +235,47 @@ a.profile .account {
 	background: white;
 	border-top: solid 5px #5d627b;
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.alluser{
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	color: #000000;
+	background: white;
+	border-top: solid 5px #5d627b;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box-title{
+	font-size: 30px;
+}
+
+
+#menu ul{
+margin: 0;
+padding: 0;
+list-style: none;
+}
+#menu li{
+display: inline;
+padding: 0;
+margin: 0;
+float: left;
+}
+#menu li a{
+display: block;
+border-left: 8px solid #C97556;
+background-color: #808080;
+padding: 3px 10px;
+text-decoration: none;
+color: #E1E2CF;
+width: 150px;
+margin: 1px 0px;
+text-align: left;
+font-size: 18px;
+}
+#menu li a:hover{
+border-left: 8px solid #990033;
+background-color: #808080;
 }
 
 table caption {

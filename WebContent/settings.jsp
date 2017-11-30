@@ -11,9 +11,13 @@
 </head>
 <body>
 	<div class="header">
-		<a href="./">ホーム</a>
-		<a href="usermanagement">ユーザー編集</a>
-		<a href="logout">ログアウト</a>
+		<div id="menu">
+			<ul>
+			<li><a href="./">ホーム</a></li>
+			<li><a href="usermanagement">ユーザー管理</a></li>
+			<li><a href="logout">ログアウト</a></li>
+			</ul>
+		</div>
 	</div>
 	<div class="settings">
 		<c:if test="${ not empty errorMessages }">
@@ -27,27 +31,29 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 		<form action="settings" method="post" enctype="multipart/form-data"><br />
-			<label for="name">名前</label>
-			<p><input name="name" value="${editUser.name}" id="name"/>※10文字以下</p>
-
-			<label for="login_id">ログインID</label>
-			<p><input name="login_id" value="${editUser.login_id}" />※半角英数字で6～20文字</p>
-			<label for="password">パスワード</label>
-			<p><input name="password" type="password" id="password"/>※記号を含む半角英数字で6～20文字</p>
+			<label for="login_id">ログインID(半角英数字で6～20文字)</label>
+			<input name="login_id" value="${editUser.login_id}" />
+			<label for="name">名前(10文字以下)</label>
+			<input name="name" value="${editUser.name}" id="name"/>
+			<label for="password">パスワード(記号を含む半角英数字で6～20文字)</label>
+			<input name="password" type="password" id="password"/>
 			<label for="password2">確認パスワード</label>
 			<input name="password2" type="password" id="password2"/> <br />
-
 			<c:if test="${editUser.id != loginUser.id}">
 				<label for="branch_id">店名</label>
 				<select name="branch_id">
 		    		<c:forEach var="branch" items="${branches}">
-						<option value="${branch.id}" <c:if test="${branch.id == editUser.branch_id }"> selected </c:if>><c:out value="${branch.name}"/> </option>
+						<option value="${branch.id}" <c:if test="${branch.id == editUser.branch_id }"> selected </c:if>>
+							<c:out value="${branch.name}"/>
+						</option>
 					</c:forEach>
 				</select><br />
 				<label for="position_id">部署・役職</label>
 				<select name="position_id">
 		   			<c:forEach var="position" items="${positions}">
-						<option value="${position.id}"<c:if test="${position.id == editUser.position_id }"> selected </c:if>><c:out value="${position.name}"/> </option>
+						<option value="${position.id}"<c:if test="${position.id == editUser.position_id }"> selected </c:if>>
+							<c:out value="${position.name}"/>
+						</option>
 					</c:forEach>
 				 </select><br />
 				<input type="hidden" name="id" value="${editUser.id}">

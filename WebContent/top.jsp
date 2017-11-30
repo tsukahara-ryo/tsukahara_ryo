@@ -20,91 +20,81 @@
 				<a href="login">ログイン</a>
 			</c:if>
 			<c:if test="${ not empty loginUser }">
-				<a href="newmessage">新規投稿</a>
-				<a href="usermanagement">ユーザー管理</a>
-				<a href="logout">ログアウト</a>
+				<div id="menu">
+				<ul>
+				<li><a href="newmessage">新規投稿</a></li>
+				<c:if test="${loginUser.position_id == 1 }">
+				<li><a href="usermanagement">ユーザー管理</a></li>
+				</c:if>
+				<li><a href="logout">ログアウト</a></li>
+				</ul>
+				</div>
 			</c:if>
 		</div>
 
-	<c:if test="${ not empty errorMessages }">
-		<div class="errorMessages">
-			<ul>
-				<c:forEach items="${errorMessages}" var="message">
-					<li><c:out value="${message}" />
-				</c:forEach>
-			</ul>
-		</div>
-		<c:remove var="errorMessages" scope="session" />
-	</c:if>
-
-
-	<c:if test="${ not empty loginUser }">
-			<div class="profile">
-
-				<div class="name">
-					<h2><c:out value="${loginUser.name}" /></h2>
-				</div>
-				ログインID：<c:out value="${loginUser.login_id}" />
-
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="message">
+						<li><c:out value="${message}" />
+					</c:forEach>
+				</ul>
 			</div>
-
-		<div class="search">
-		<span class="box-title">絞込み</span>
-			<form action="" method="get">
-
-				カテゴリー<p>	<input name="cotegory" id="cotegory" value="${cotegory}"/></p>
-				<p>日時</p>
-				<input type="date" id="begin" name="begin" value="${begin}" />～
-				<input type="date" id="end" name="end" value="${end}" />
-				<input type="submit"	value="絞込み" />
-				<input type="button" onclick="location.href='http://localhost:8080/tsukahara_ryo/'"value="クリア">
-			</form>
-		</div>
-
-
-		<div class="messages">
+			<c:remove var="errorMessages" scope="session" />
+		</c:if>
+		<c:if test="${ not empty loginUser }">
+			<div class="search">
+				<span class="box-title">絞込み</span>
+				<form action="" method="get">
+					カテゴリー<p><input name="cotegory" id="cotegory" value="${cotegory}" style="width:133px;"/></p>
+					<p>投稿日時</p>
+					<input type="date" id="begin" name="begin" value="${begin}" />～
+					<input type="date" id="end" name="end" value="${end}" />
+					<input type="submit"	value="絞込み" />
+					<input type="button" onclick="location.href='http://localhost:8080/tsukahara_ryo/'"value="クリア">
+				</form>
+			</div>
 			<c:forEach items="${messages}" var="message">
 				<div class="message">
-					<div class="account-name">
-						<span class="name">投稿者：<c:out value="${message.name}" /></span>
+					件名
+					<div class="subject">
+						 <br><c:out value="${message.subject}" />
 					</div>
-					件名<div class="subject">
-						<c:out value="${message.subject}" />
+					<br>カテゴリー
+					<div class="cotegory">
+						 <br><c:out value="${message.cotegory}" />
 					</div>
-					カテゴリー<div class="cotegory">
-						<c:out value="${message.cotegory}" />
-					</div>
-					本文
+					<br>本文
 					<div class="text">
-						<c:forEach var="str" items="${fn:split(message.text,'
+						 <c:forEach var="str" items="${fn:split(message.text,'
 ')}" ><c:out value="${str}" /><br></c:forEach>
 					</div>
+					<div class="name">投稿者：<c:out value="${message.name}" /></div>
 					投稿時間
 					<div class="messagedate">
 						<fmt:formatDate value="${message.insertDate}"
-							pattern="yyyy-MM-dd HH:mm:ss" />
+							pattern="yyyy/MM/dd HH:mm:ss" />
 					</div>
 					<input type="hidden" name="id" value="${message.messagesid}">
-						<c:if test="${message.userId == loginUser.id }">
-					<form action="del" method="post">
-						<br /> <input type="hidden" name="id" value="${message.messagesid}">
-						<input type="submit" value="メッセージ削除"onClick="return confirm('削除しますか？')" /> <br />
-					</form>
-						</c:if>
+					<c:if test="${message.userId == loginUser.id }">
+						<form action="del" method="post">
+							<br /> <input type="hidden" name="id" value="${message.messagesid}">
+							<input type="submit" value="投稿削除"onClick="return confirm('削除しますか？')" /> <br />
+						</form>
+					</c:if>
 				</div>
 				<c:forEach items="${comments}" var="comment">
 					<c:if test="${message.messagesid == comment.message_id }">
 						<div class="comment">
+						コメント<br />
 							<div class="text">
 							<c:forEach var="str" items="${fn:split(comment.text,'
 ')}" ><c:out value="${str}" /><br>
 							</c:forEach>
 							</div>
 							<div class="date">
-								<c:out value="${comment.insertDate}" />
-							</div>
-							<div class="user_id">
-								<c:out value="${comment.name}" />
+								<c:out value="${comment.name}" /><br>
+								<fmt:formatDate value="${comment.insertDate}" pattern="yyyy/MM/dd HH:mm:ss" />
 							</div>
 							<c:if test="${comment.user_id == loginUser.id }">
 								<form action="comdel" method="post">
@@ -118,14 +108,13 @@
 				<div class="form-area">
 					<form action="newComment" method="post">
 						コメント<br />
-						<textarea name="comment" cols="100" rows="5" class="cotegry-box"></textarea>
+						<textarea name="comment" cols="100" rows="5" class="comment-box"></textarea>
 						<input type="hidden" name="message_id" value="${message.messagesid}"> <br />
-						<input type="submit" value="コメントする">（500文字まで）
+						<input type="submit" value="コメント">（500文字以下）
 					</form>
 				</div>
 			</c:forEach>
-		</div>
-	</c:if>
-</div>
+		</c:if>
+	</div>
 </body>
 </html>

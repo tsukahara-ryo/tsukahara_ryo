@@ -23,7 +23,7 @@
 	<div class="login">
 		<form action="login" method="post"><br />
 			<div class="form-item">
-				<label for="login_id">loginID</label>
+				<label for="login_id">ログインID</label>
 				<input name="login_id" id="login_id"/> <br />
 				<label for="password">パスワード</label>
 				<input name="password" type="password" id="password"/> <br />

@@ -12,8 +12,12 @@
 </head>
 <body>
 	<div class="header">
-	<a href="./">ホーム</a>
-	<a href="logout">ログアウト</a>
+		<div id="menu">
+			<ul>
+			<li><a href="./">ホーム</a></li>
+			<li><a href="logout">ログアウト</a></li>
+			</ul>
+		</div>
 	</div>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
@@ -25,20 +29,17 @@
 		</div>
 		<c:remove var="errorMessages" scope="session" />
 	</c:if>
-
-
 	<div class="newmessage">
-	<label>新規投稿</label>
+		<h4>新規投稿</h4>
 		<form action="newmessage" method="post">
-			<p><label for="subject">件名</label></p>
-			<p><input name="subject"id="subject" value="${message.subject}" /> ※必須 30文字以下</p>
-			<p><label for="cotegory">カテゴリー</label></p>
-			<p><input name="cotegory" id="cotegory" value="${message.cotegory}" /> ※必須 10文字以下</p>
-			<p><label for="text">本文</label></p>
-			<p><textarea name="text" cols="50" rows="10" class="cotegry-box" ><c:out value="${message.text}" /></textarea> ※必須 1000文字以下</p>
-			<p><input type="submit"value="投稿" /></p>
+			<label for="subject">件名(30文字以下)</label>
+			<input name="subject"id="subject" value="${message.subject}" />
+			<label for="cotegory">カテゴリー(10文字以下)</label>
+			<input name="cotegory" id="cotegory" value="${message.cotegory}" />
+			<label for="text">本文(1000文字以下)</label>
+			<textarea name="text" cols="90" rows="10" class="message-box"  ><c:out value="${message.text}" /></textarea>
+			<br><input type="submit"value="投稿" />
 		</form>
-		<input type="button" onclick="location.href='http://localhost:8080/tsukahara_ryo/newmessage'"value="クリア">
 	</div>
 </body>
 </html>

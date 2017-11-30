@@ -34,7 +34,7 @@ public class SettingsServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 		String id = request.getParameter("id");
 
-		if (StringUtils.isBlank(request.getParameter("id")) || !id.matches("[0-9]") == true){
+		if (StringUtils.isBlank(request.getParameter("id")) || !id.matches("^[0-9]*$") == true){
 			messages.add("不正なIDが入力されました");
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("usermanagement");

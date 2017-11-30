@@ -12,9 +12,13 @@
 </head>
 <body>
 	<div class="header">
-		<a href="./">ホーム</a>
-		<a href="signup">新規登録</a>
-		<a href="logout">ログアウト</a>
+		<div id="menu">
+			<ul>
+			<li><a href="./">ホーム</a></li>
+			<li><a href="signup">新規登録</a></li>
+			<li><a href="logout">ログアウト</a></li>
+			</ul>
+		</div>
 	</div>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
@@ -26,66 +30,64 @@
 		</div>
 		<c:remove var="errorMessages" scope="session" />
 	</c:if>
-
-
-	<table border="1" cellspacing="0" bordercolor="#000000">
-	<caption>ユーザー情報一覧</caption>
-		<tr>
-			<th width="200" height="40">名前</th>
-			<th width="200" >支店名</th>
-			<th width="200" >部署・役職</th>
-			<th width="100" >編集</th>
-			<th width="100" >停止・復活</th>
-		</tr>
-
-		<c:forEach var="user" items="${users}">
+	<div class="alluser">
+		<table border="1" cellspacing="0" bordercolor="#000000">
+			<caption>ユーザー情報一覧</caption>
 			<tr>
-				<td height="40"><c:out value="${user.name}" /></td>
-
-				<td height="40">
-					<c:forEach var="branch" items="${branches}">
-						<c:if test="${user.branch_id == branch.id}">
-							<c:out value="${branch.name}" />
-						</c:if>
-					</c:forEach>
-				</td>
-
-				<td height="40">
-					<c:forEach var="position" items="${positions}">
-						<c:if test="${user.position_id == position.id}">
-							<c:out value="${position.name}" />
-						</c:if>
-					</c:forEach>
-				</td>
-
-				<td align="center" valign="middle" height="40">
-					<div class="settingbutton">
-						<form action="settings" method="get">
-							<input type="hidden" name="id" value="${user.id}" />
-							<input type="submit" value="編集" style="margin: 0px; float: left;" />
-						</form>
-					</div>
-				</td>
-
-				<td align="center" valign="middle" height="40">
-					<div class="isdeletedbutton">
-						<c:if test="${user.id != loginUser.id}">
-							<form action="isDeleted" method="post">
-								<input type="hidden" name="id" value="${user.id}" />
-								<c:if test="${user.is_deleted == 0}">
-									<input type="hidden" name="isdeleted" value="1" />
-									<input id="stopbutton" type="submit" value="停止" onClick="return confirm('停止しますか？')" style="margin: 0px; float: left;" />
-								</c:if>
-								<c:if test="${user.is_deleted == 1}">
-									<input type="hidden" name="isdeleted" value="0" />
-									<input id="bornbutton" type="submit" value="復活" onClick="return confirm('復活しますか？')" style="margin: 0px; float: left;" />
-								</c:if>
-							</form>
-						</c:if>
-					</div>
-				</td>
+				<th width="200" height="40">名前</th>
+				<th width="200" >支店名</th>
+				<th width="200" >部署・役職</th>
+				<th width="100" >編集</th>
+				<th width="100" >停止・復活</th>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach var="user" items="${users}">
+				<tr>
+					<td height="40"><c:out value="${user.name}" /></td>
+					<td height="40">
+						<c:forEach var="branch" items="${branches}">
+							<c:if test="${user.branch_id == branch.id}">
+								<c:out value="${branch.name}" />
+							</c:if>
+						</c:forEach>
+					</td>
+					<td height="40">
+						<c:forEach var="position" items="${positions}">
+							<c:if test="${user.position_id == position.id}">
+								<c:out value="${position.name}" />
+							</c:if>
+						</c:forEach>
+					</td>
+					<td align="center" valign="middle" height="40">
+						<div class="settingbutton">
+							<form action="settings" method="get">
+								<input type="hidden" name="id" value="${user.id}" />
+								<input type="submit" value="編集" style="margin: 0px; float: left;" />
+							</form>
+						</div>
+					</td>
+					<td align="center" valign="middle" height="40">
+						<c:if test="${user.id != loginUser.id}">
+							<div class="isdeletedbutton">
+								<form action="isDeleted" method="post">
+									<input type="hidden" name="id" value="${user.id}" />
+									<c:if test="${user.is_deleted == 0}">
+										<input type="hidden" name="isdeleted" value="1" />
+										<input id="stopbutton" type="submit" value="停止" onClick="return confirm('停止しますか？')" style="margin: 0px; float: left;" />
+									</c:if>
+									<c:if test="${user.is_deleted == 1}">
+										<input type="hidden" name="isdeleted" value="0" />
+										<input id="bornbutton" type="submit" value="復活" onClick="return confirm('復活しますか？')" style="margin: 0px; float: left;" />
+									</c:if>
+								</form>
+							</div>
+						</c:if>
+						<c:if test="${user.id == loginUser.id}">
+							ログイン中
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
